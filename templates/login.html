@@ -1,0 +1,153 @@
+<!-- templates/login.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Form</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <style>
+        .logo {
+            height: 24px;
+            animation: rotateLogo 4s linear infinite;
+        }
+
+        @keyframes rotateLogo {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+
+            background-color: {{.BackgroundColor}};
+            color: {{.TextColor}};
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            /* To center the container vertically */
+        }
+
+        body.dark-theme {
+            background-color: #2b2b2b;
+            color: blueviolet;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label,
+        input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            /* Ensure padding and border are included in the width */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+
+            border-color: {
+                    {
+                    .HighlightColor
+                }
+            }
+
+            ;
+        }
+
+        .login-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            /* Light theme styles */
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        body.dark-theme .login-button {
+            /* Dark theme styles */
+            background-color: #4a90e2;
+            color: #000;
+        }
+
+        .switch-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>PlayL<img src="/assets/logo-256.png" alt="Logo" class="logo">cal SSR</h1>
+        <form method="post" action="/login">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" class="login-button">Login</button>
+        </form>
+    </div>
+
+    <div class="switch-container">
+        <span class="theme-switch">Light Theme</span>
+        <label class="switch">
+            <input type="checkbox" id="themeSwitch">
+            <span class="slider round"></span>
+        </label>
+        <span class="theme-switch">Dark Theme</span>
+    </div>
+
+    <script>
+        const themeSwitch = document.getElementById('themeSwitch');
+        const body = document.querySelector('body');
+
+        themeSwitch.addEventListener('change', () => {
+            body.classList.toggle('dark-theme', themeSwitch.checked);
+        });
+    </script>
+</body>
+
+</html>
